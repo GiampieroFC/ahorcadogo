@@ -68,11 +68,11 @@ func main() {
 	enter := func(key *fyne.KeyEvent) {
 		fmt.Println("has presionado", key.Name)
 		if key.Name == fyne.KeyReturn || key.Name == fyne.KeyEnter {
-			if !strings.Contains(le, input.Text) {
-				le += input.Text + " "
+			if !strings.Contains(le, strings.ToLower(input.Text)) {
+				le += strings.ToLower(input.Text) + " "
 				letrasEscritas.Set(le)
 			}
-			channel <- input.Text
+			channel <- strings.ToLower(input.Text)
 			input.SetText("")
 		}
 	}
@@ -88,13 +88,13 @@ func main() {
 	}
 
 	botonE := widget.NewButton("Enter letter", func() {
-		if !strings.Contains(le, input.Text) {
-			le += input.Text + " "
+		if !strings.Contains(le, strings.ToLower(input.Text)) {
+			le += strings.ToLower(input.Text) + " "
 			letrasEscritas.Set(le)
 		}
-		channel <- input.Text
+		channel <- strings.ToLower(input.Text)
 		input.SetText("")
-		fmt.Println("has escrito", input.Text)
+		fmt.Println("has escrito", strings.ToLower(input.Text))
 
 	})
 
@@ -103,7 +103,7 @@ func main() {
 	Iniciar := func() {
 		if !input.Disabled() && !botonE.Disabled() {
 			re = true
-			channel <- input.Text
+			channel <- strings.ToLower(input.Text)
 			input.SetText("")
 			pantallaBinding.Set("")
 		}
