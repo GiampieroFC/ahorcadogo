@@ -126,7 +126,7 @@ func main() {
 
 func logica(pantallaBinding binding.String, chances binding.String, link *widget.Hyperlink, input *widgets.EntradaConEvento, botonE *widget.Button, channel chan string) {
 	palabra := scrap.PrintPalabra()
-	var letras string = " ()-,.áàäãâæéèëíìïóòöøúùüßšçπ0123456789€%$&#'\"\\/[]{}!¡¿?+=:_<>·@#|°®"
+	var letras string = " ()-,–.áàäãâæéèëíìïóòöøúùüßšçπ0123456789€%$&#'\"\\/[]{}!¡¿?+=:_<>·@#|°®"
 	if link.Visible() {
 		link.Hide()
 	}
