@@ -1,7 +1,7 @@
 package main
 
 import (
-	"errors"
+	// "errors"
 	"fmt"
 	"github/GiampieroFC/ahorcadoGO/scrap"
 	"github/GiampieroFC/ahorcadoGO/widgets"
@@ -44,6 +44,7 @@ func main() {
 		func(value bool) {
 			fmt.Println("Radio set to", value)
 			if value {
+				letrasEscritas.Set("(carácteres especiales ya escritos) " + le)
 				letrasEscritasLabel.Show()
 			} else {
 				letrasEscritasLabel.Hide()
@@ -80,14 +81,15 @@ func main() {
 		}
 	}
 	input.TeclaEvento = enter
-	input.SetPlaceHolder("escribe una letra")
 
 	input.Validator = func(s string) error {
+		fmt.Printf("len(sa): %v\n", len(s))
 		if len(s) > 1 && s != "ñ" {
-			as := strings.Split(s, "")
-			input.SetText(as[len(as)-1])
-			return errors.New("ingresa solo una letra")
+			input.SetText("")
+			input.SetPlaceHolder("ESCRIBE SOLO UNA LETRA")
+			return nil
 		}
+		input.SetPlaceHolder("escribe una letra")
 		return nil
 	}
 
