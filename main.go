@@ -67,6 +67,9 @@ func main() {
 
 	enter := func(key *fyne.KeyEvent) {
 		fmt.Println("has presionado", key.Name)
+		if input.Text == "" {
+			return
+		}
 		if key.Name == fyne.KeyReturn || key.Name == fyne.KeyEnter {
 			if !strings.Contains(le, strings.ToLower(input.Text)) {
 				le += strings.ToLower(input.Text) + " "
@@ -81,13 +84,17 @@ func main() {
 
 	input.Validator = func(s string) error {
 		if len(s) > 1 && s != "ñ" {
-			input.SetText("")
+			as := strings.Split(s, "")
+			input.SetText(as[len(as)-1])
 			return errors.New("ingresa solo una letra")
 		}
 		return nil
 	}
 
-	botonE := widget.NewButton("Enter letter", func() {
+	botonE := widget.NewButton("Enter", func() {
+		if input.Text == "" {
+			return
+		}
 		if !strings.Contains(le, strings.ToLower(input.Text)) {
 			le += strings.ToLower(input.Text) + " "
 			letrasEscritas.Set(le)
